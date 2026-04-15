@@ -18,14 +18,15 @@ namespace FarmSimSystems
         public string Name { get; set; }
         public int daysPerStage { get; set; }
         public int daysInCurrentStage { get; set; }
-
         public CropStage currentStage { get; set; }
+        public Item HarvestItem { get; set; }
 
-        public Crop(string name, int daysPerStage)
+        public Crop(string name, int daysPerStage, Item harvestItem)
         {
             Name = name;
             this.daysPerStage = daysPerStage;
             daysInCurrentStage = 0;
+            HarvestItem = harvestItem;
             currentStage = CropStage.Seed;
         }
 
