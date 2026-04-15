@@ -1,5 +1,27 @@
+# Build output
 bin/
 obj/
 /packages/
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.slnx
+VSWorkspaceState.json
+ProjectSettings.json
+slnx.sqlite
+
+# Rider
+.idea/
 riderModule.iml
 /_ReSharper.Caches/
+*.futdCache.v2
+DocumentLayout.json
+DocumentLayout.backup.json
+
+# General
+*.DS_Store
+Thumbs.db
