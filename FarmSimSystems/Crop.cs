@@ -28,5 +28,18 @@ namespace FarmSimSystems
             daysInCurrentStage = 0;
             currentStage = CropStage.Seed;
         }
+
+        public void AdvanceDay()
+        {
+            daysInCurrentStage++;
+
+            if (daysInCurrentStage >= daysPerStage)
+            {
+                if (currentStage < CropStage.Harvest) { 
+                    currentStage++;
+                    daysInCurrentStage = 0;
+                }
+            }
+        }
     }
 }
