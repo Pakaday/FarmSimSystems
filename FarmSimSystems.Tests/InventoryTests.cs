@@ -38,4 +38,25 @@ public class InventoryTests
 
         Assert.Equal(3, inventory.GetItem(1).Quantity);
     }
+
+    [Fact]
+    public void RemoveItem_ToZero_RemovesFromInventory()
+    {
+        var inventory = new Inventory();
+        var wheat = new Item(1, "Wheat", 1, Rarity.Bronze);
+
+        inventory.AddItem(wheat);
+        inventory.RemoveItem(wheat);
+
+        Assert.Null(inventory.GetItem(1));
+    }
+
+    [Fact]
+    public void GetItem_NonExistentItem_ReturnsNull()
+    {
+        var inventory = new Inventory();
+        var wheat = new Item(1, "Wheat", 1, Rarity.Bronze);
+
+        Assert.Null(inventory.GetItem(1));
+    }
 }
