@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarmSimSystems", "FarmSimSystems\FarmSimSystems.csproj", "{46C952C2-B083-4E69-A1D7-6FF67A4966A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarmSimSystems.Tests", "FarmSimSystems.Tests\FarmSimSystems.Tests.csproj", "{B5DF9E43-F9DE-46F0-B4BA-23762EF3DF0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{46C952C2-B083-4E69-A1D7-6FF67A4966A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46C952C2-B083-4E69-A1D7-6FF67A4966A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46C952C2-B083-4E69-A1D7-6FF67A4966A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5DF9E43-F9DE-46F0-B4BA-23762EF3DF0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5DF9E43-F9DE-46F0-B4BA-23762EF3DF0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5DF9E43-F9DE-46F0-B4BA-23762EF3DF0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5DF9E43-F9DE-46F0-B4BA-23762EF3DF0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
