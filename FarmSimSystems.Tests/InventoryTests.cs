@@ -35,5 +35,7 @@ public class InventoryTests
 
         inventory.AddItem(wheat);
         inventory.RemoveItem(new Item(1, "Wheat", 2, Rarity.Bronze));
+
+        Assert.Equal(3, inventory.GetItem(1).Quantity);
     }
 }
