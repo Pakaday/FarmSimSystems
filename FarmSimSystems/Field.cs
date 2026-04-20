@@ -21,16 +21,16 @@ public class Field
         }
     }
 
-    public void GetPlot(int row, int col)
+    public Plot GetPlot(int row, int col)
     {
-        plots[row, col] = new Plot();
+        return plots[row, col];
     }
 
-    public void AdvanceDay(int rows, int cols)
+    public void AdvanceDay()
     {
-        for (int r = 0; r < rows; r++)
+        for (int r = 0; r < Rows; r++)
         {
-            for (int c = 0; c < cols; c++)
+            for (int c = 0; c < Cols; c++)
             {
                 plots[r, c].AdvanceDay();
             }
