@@ -63,4 +63,12 @@ public class Plot
             isWatered = false;
         }
     }
+
+    public void Harvest(Inventory inventory)
+    {
+        if (currentState != PlotState.Planted || currentCrop.currentStage != CropStage.Harvest)
+        {
+            return;
+        }
+    }
 }
