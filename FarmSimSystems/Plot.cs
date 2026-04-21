@@ -70,5 +70,9 @@ public class Plot
         {
             return;
         }
+
+        inventory.AddItem(currentCrop.HarvestItem);
+        currentCrop = null;
+        currentState = PlotState.Tilled;
     }
 }
