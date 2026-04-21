@@ -1,6 +1,8 @@
+using FarmSimSystems.Interfaces;
+
 namespace FarmSimSystems;
 
-public class Field
+public class Field : IField
 {
     public int Rows { get; set; }
     public int Cols { get; set; }

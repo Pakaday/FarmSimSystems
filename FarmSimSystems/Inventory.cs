@@ -1,6 +1,8 @@
+using FarmSimSystems.Interfaces;
+
 namespace FarmSimSystems;
 
-public class Inventory
+public class Inventory : IInventory
 {
     private Dictionary<int, Item> items = new Dictionary<int, Item>();
 
