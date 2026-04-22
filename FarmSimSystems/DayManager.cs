@@ -1,14 +1,14 @@
-﻿
+﻿using FarmSimSystems.Interfaces;
 
 namespace FarmSimSystems
 {
     public class DayManager
     {
-        public Field field { get; }
-        public Inventory inventory { get; }
+        public IField field { get; }
+        public IInventory inventory { get; }
         public int currentDay { get; set; }
 
-        public DayManager(Field field, Inventory inventory)
+        public DayManager(IField field, IInventory inventory)
         {
             this.field = field;
             this.inventory = inventory;

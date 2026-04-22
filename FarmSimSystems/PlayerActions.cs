@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FarmSimSystems.Interfaces;
 
 namespace FarmSimSystems
 {
     public class PlayerActions
     {
-        public Field field { get; }
-        public Inventory inventory { get; }
+        public IField field { get; }
+        public IInventory inventory { get; }
 
-        public PlayerActions(Field field, Inventory inventory)
+        public PlayerActions(IField field, IInventory inventory)
         {
             this.field = field;
             this.inventory = inventory;

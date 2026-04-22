@@ -1,3 +1,5 @@
+using FarmSimSystems.Interfaces;
+
 namespace FarmSimSystems;
 
 public enum PlotState
@@ -20,7 +22,7 @@ public class Plot
         currentCrop = null;
     }
 
-    public void Till(Inventory inventory)
+    public void Till(IInventory inventory)
     {
         if (currentState == PlotState.Untilled)
         {
@@ -64,7 +66,7 @@ public class Plot
         }
     }
 
-    public void Harvest(Inventory inventory)
+    public void Harvest(IInventory inventory)
     {
         if (currentState != PlotState.Planted || currentCrop.currentStage != CropStage.Harvest)
         {
