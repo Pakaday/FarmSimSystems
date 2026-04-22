@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Moq;
+using FarmSimSystems.Interfaces;
 
 namespace FarmSimSystems.Tests
 {
@@ -11,66 +8,67 @@ namespace FarmSimSystems.Tests
         [Fact]
         public void Till_UntilledPlot_TransitionsToTilled()
         {
-            
-            var field = new Field(1, 1);
-            var inventory = new Inventory();
-            var playerActions = new PlayerActions(field, inventory);
-            var seedItem = new SeedItem(1, "Wheat Seed", 3, Rarity.Bronze, 2);
-            var crop = new Crop(seedItem.Name, seedItem.daysPerStage, new Item(seedItem.Id, seedItem.Name, 1, seedItem.Rarity));
-            field.GetPlot(0, 0).Plant(crop);
+            var mockField = new Mock<IField>();
+            var mockInventory = new Mock<IInventory>();
+            var playerActions = new PlayerActions(mockField.Object, mockInventory.Object);
+            var plot = new Plot();
+            mockField.Setup(f => f.GetPlot(0, 0)).Returns(plot);
             
             playerActions.Till(0, 0);
             
-            Assert.Equal(PlotState.Tilled, field.GetPlot(0, 0).currentState);
+            Assert.Equal(PlotState.Tilled, plot.currentState);
         }
 
         [Fact]
         public void Plant_TilledPlot_AddsCropAndRemovesSeed()
         {
-            
-            var field = new Field(1, 1);
-            var inventory = new Inventory();
-            var playerActions = new PlayerActions(field, inventory);
+            var mockField = new Mock<IField>();
+            var mockInventory = new Mock<IInventory>();
+            var playerActions = new PlayerActions(mockField.Object, mockInventory.Object);
             var seedItem = new SeedItem(1, "Wheat Seed", 3, Rarity.Bronze, 2);
-            inventory.AddItem(seedItem);
-            field.GetPlot(0, 0).Till(inventory);
+            var plot = new Plot();
+            mockField.Setup(f => f.GetPlot(0, 0)).Returns(plot);
+            plot.Till(mockInventory.Object);
             
             playerActions.Plant(0, 0, seedItem);
             
-            Assert.Equal(PlotState.Planted, field.GetPlot(0, 0).currentState);
-            Assert.Null(inventory.GetItem(seedItem.Id));
+            Assert.Equal(PlotState.Planted, plot.currentState);
+            mockInventory.Verify(i => i.RemoveItem(seedItem), Times.Once);
         }
 
         [Fact]
         public void Water_UnwateredPlot_SetsIsWatered()
         {
-            
-            var field = new Field(1, 1);
-            var inventory = new Inventory();
-            var playerActions = new PlayerActions(field, inventory);
-            field.GetPlot(0, 0).Till(inventory);
+            var mockField = new Mock<IField>();
+            var mockInventory = new Mock<IInventory>();
+            var playerActions = new PlayerActions(mockField.Object, mockInventory.Object);
+            var plot = new Plot();
+            mockField.Setup(f => f.GetPlot(0, 0)).Returns(plot);
             
             playerActions.Water(0, 0);
             
-            Assert.True(field.GetPlot(0, 0).isWatered);
+            Assert.True(plot.isWatered);
         }
 
         [Fact]
         public void Harvest_HarvestStageCrop_AddsItemToInventory()
         {
-            var field = new Field(1, 1);
-            var inventory = new Inventory();
-            var playerActions = new PlayerActions(field, inventory);
-            var seedItem = new SeedItem(1, "Wheat Seed", 3, Rarity.Bronze, 2);
-            var crop = new Crop(seedItem.Name, seedItem.daysPerStage, new Item(seedItem.Id, seedItem.Name, 1, seedItem.Rarity));
-            field.GetPlot(0, 0).Till(inventory);
-            field.GetPlot(0, 0).Plant(crop);
+            var mockField = new Mock<IField>();
+            var mockInventory = new Mock<IInventory>();
+            var playerActions = new PlayerActions(mockField.Object, mockInventory.Object);
+            var harvestItem = new Item(1, "Wheat", 1, Rarity.Bronze);
+            var crop = new Crop("Wheat", 2, harvestItem);
+            var plot = new Plot();
+            mockField.Setup(f => f.GetPlot(0, 0)).Returns(plot);
+            plot.Till(mockInventory.Object);
+            plot.Plant(crop);
             crop.currentStage = CropStage.Harvest;
             
             playerActions.Harvest(0, 0);
             
-            Assert.Equal(PlotState.Tilled, field.GetPlot(0, 0).currentState);
-            Assert.NotNull(inventory.GetItem(seedItem.Id));
+            Assert.Equal(PlotState.Tilled, plot.currentState);
+            mockInventory.Verify(i => i.AddItem(It.IsAny<Item>()), Times.Once);
+
         }
     }
 }
