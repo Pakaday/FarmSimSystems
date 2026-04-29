@@ -10,11 +10,11 @@ public class Player
     public int MaxEnergy { get; set; }
     public IInventory inventory { get; set; }
     public int Money { get; set; }
-    public Tool currentTool { get; set; }
+    public ITool currentTool { get; set; }
     public Position playerPosition { get; set; }
     public Direction facing { get; set; }
 
-    public Player(string name, int energy, int maxEnergy, IInventory inventory, int money, Tool currentTool,
+    public Player(string name, int energy, int maxEnergy, IInventory inventory, int money, ITool currentTool,
         Position playerPosition, Direction facing)
     {
         Name = name;

@@ -1,8 +1,9 @@
 using FarmSimSystems.Enums;
+using FarmSimSystems.Interfaces;
 
 namespace FarmSimSystems;
 
-public class Tool
+public class Tool : ITool
 {
     public int Id { get; }
     public string Name { get; }
