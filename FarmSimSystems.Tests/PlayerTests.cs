@@ -67,8 +67,6 @@ public class PlayerTests
         var mockTool = new Mock<ITool>();
         var player = new Player("Freddie", 0, 100, mockInventory.Object, 50, mockTool.Object, new Position(0, 0), Direction.North);
 
-        player.CanAct();
-
         Assert.False(player.CanAct());
     }
 
