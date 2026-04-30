@@ -13,12 +13,14 @@ public class Item
     public string Name { get; set; }
     public int Quantity { get; set; }
     public Rarity Rarity { get; set; }
+    public float BasePrice { get; set; }
 
-    public Item(int id, string name, int quantity, Rarity rarity)
+    public Item(int id, string name, int quantity, Rarity rarity, float basePrice)
     {
         Id = id;
         Name = name;
         Quantity = quantity;
         Rarity = rarity;
+        BasePrice = basePrice;
     }
 }
