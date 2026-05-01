@@ -56,7 +56,7 @@ namespace FarmSimSystems.Tests
             var mockField = new Mock<IField>();
             var mockInventory = new Mock<IInventory>();
             var playerActions = new PlayerActions(mockField.Object, mockInventory.Object);
-            var harvestItem = new Item(1, "Wheat", 1, Rarity.Bronze);
+            var harvestItem = new Item(1, "Wheat", 1, Rarity.Bronze, 10f);
             var crop = new Crop("Wheat", 2, harvestItem);
             var plot = new Plot();
             mockField.Setup(f => f.GetPlot(0, 0)).Returns(plot);

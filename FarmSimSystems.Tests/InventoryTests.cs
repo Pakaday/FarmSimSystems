@@ -8,7 +8,7 @@ public class InventoryTests
     public void AddItem_NewItem_AddsToInventory()
     {
         var inventory = new Inventory();
-        var wheat = new Item(1, "Wheat", 5, Rarity.Bronze);
+        var wheat = new Item(1, "Wheat", 5, Rarity.Bronze, 1);
 
         inventory.AddItem(wheat);
 
@@ -19,7 +19,7 @@ public class InventoryTests
     public void AddItem_ExistingItem_IncrementsQuantity()
     {
         var inventory = new Inventory();
-        var wheat = new Item(1, "Wheat", 1, Rarity.Bronze);
+        var wheat = new Item(1, "Wheat", 1, Rarity.Bronze, 1);
 
         inventory.AddItem(wheat);
         inventory.AddItem(wheat);
@@ -31,10 +31,10 @@ public class InventoryTests
     public void RemoveItem_ReducesQuantity()
     {
         var inventory = new Inventory();
-        var wheat = new Item(1, "Wheat", 5, Rarity.Bronze);
+        var wheat = new Item(1, "Wheat", 5, Rarity.Bronze,1 );
 
         inventory.AddItem(wheat);
-        inventory.RemoveItem(new Item(1, "Wheat", 2, Rarity.Bronze));
+        inventory.RemoveItem(new Item(1, "Wheat", 2, Rarity.Bronze,1));
 
         Assert.Equal(3, inventory.GetItem(1).Quantity);
     }
@@ -43,7 +43,7 @@ public class InventoryTests
     public void RemoveItem_ToZero_RemovesFromInventory()
     {
         var inventory = new Inventory();
-        var wheat = new Item(1, "Wheat", 1, Rarity.Bronze);
+        var wheat = new Item(1, "Wheat", 1, Rarity.Bronze, 1);
 
         inventory.AddItem(wheat);
         inventory.RemoveItem(wheat);
@@ -55,7 +55,7 @@ public class InventoryTests
     public void GetItem_NonExistentItem_ReturnsNull()
     {
         var inventory = new Inventory();
-        var wheat = new Item(1, "Wheat", 1, Rarity.Bronze);
+        var wheat = new Item(1, "Wheat", 1, Rarity.Bronze, 1);
 
         Assert.Null(inventory.GetItem(1));
     }

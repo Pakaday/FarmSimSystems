@@ -37,7 +37,7 @@ namespace FarmSimSystems
                 return;
             }
 
-            var crop = new Crop(seed.Name, seed.daysPerStage, new Item(seed.Id, seed.Name, 1, seed.Rarity));
+            var crop = new Crop(seed.Name, seed.daysPerStage, new Item(seed.Id, seed.Name, 1, seed.Rarity, 1));
             plot.Plant(crop);
             inventory.RemoveItem(seed);
         }

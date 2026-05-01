@@ -24,7 +24,7 @@ public class PlotTests
     public void Plant_TilledPlot_TransitionsToPlanted()
     {
         var plot = new Plot();
-        var crop = (new Crop("Wheat", 3, new Item(1, "Wheat", 1, Rarity.Bronze)));
+        var crop = (new Crop("Wheat", 3, new Item(1, "Wheat", 1, Rarity.Bronze, 1)));
 
         plot.Till(inventory: null);
         plot.Plant(crop);

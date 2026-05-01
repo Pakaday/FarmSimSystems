@@ -8,7 +8,7 @@ namespace FarmSimSystems.Extensions
 {
     public static class RarityExtensions
     {
-        public static float GetMultiplier(this Rarity rarity)
+        public static float GetPriceMultiplier(this Rarity rarity)
         {
             return rarity switch
             {

@@ -3,7 +3,7 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        Item wheat = new Item(1, "Wheat", 1, Rarity.Bronze);
+        Item wheat = new Item(1, "Wheat", 1, Rarity.Bronze, 1);
 
         Crop wheatCrop = new Crop("Wheat", 2, wheat);
 
