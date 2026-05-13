@@ -5,12 +5,12 @@ namespace FarmSimSystems
     public class PlayerActions
     {
         public IField field { get; }
-        public IInventory inventory { get; }
+        public Player player { get; }
 
-        public PlayerActions(IField field, IInventory inventory)
+        public PlayerActions(IField field, Player player)
         {
             this.field = field;
-            this.inventory = inventory;
+            this.player = player;
         }
 
         public void Till(int row, int col)
@@ -25,7 +25,7 @@ namespace FarmSimSystems
                 }
             }
 
-            plot.Till(inventory);
+            plot.Till(player.inventory);
         }
 
         public void Plant(int row, int col, SeedItem seed)
@@ -39,7 +39,7 @@ namespace FarmSimSystems
 
             var crop = new Crop(seed.Name, seed.daysPerStage, new Item(seed.Id, seed.Name, 1, seed.Rarity, 1));
             plot.Plant(crop);
-            inventory.RemoveItem(seed);
+            player.inventory.RemoveItem(seed);
         }
 
         public void Water(int row, int col)
@@ -62,7 +62,7 @@ namespace FarmSimSystems
             {
                 return;
             }
-            plot.Harvest(inventory);
+            plot.Harvest(player.inventory);
         }
     }
 }

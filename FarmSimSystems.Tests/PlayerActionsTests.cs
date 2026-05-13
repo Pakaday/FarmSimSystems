@@ -1,16 +1,22 @@
-﻿using Moq;
+﻿using FarmSimSystems.Enums;
+using Moq;
 using FarmSimSystems.Interfaces;
 
 namespace FarmSimSystems.Tests
 {
     public class PlayerActionsTests
     {
+        private Player CreateDefaultPlayer(IInventory inventory)
+        {
+            return new Player("Freddie", 100, 100, inventory, 50, new Tool(1, "Hoe", 1, 2), new Position(0, 0), Direction.North);
+        }
+
         [Fact]
         public void Till_UntilledPlot_TransitionsToTilled()
         {
             var mockField = new Mock<IField>();
             var mockInventory = new Mock<IInventory>();
-            var playerActions = new PlayerActions(mockField.Object, mockInventory.Object);
+            var playerActions = new PlayerActions(mockField.Object, CreateDefaultPlayer(mockInventory.Object));
             var plot = new Plot();
             mockField.Setup(f => f.GetPlot(0, 0)).Returns(plot);
             
@@ -24,7 +30,7 @@ namespace FarmSimSystems.Tests
         {
             var mockField = new Mock<IField>();
             var mockInventory = new Mock<IInventory>();
-            var playerActions = new PlayerActions(mockField.Object, mockInventory.Object);
+            var playerActions = new PlayerActions(mockField.Object, CreateDefaultPlayer(mockInventory.Object));
             var seedItem = new SeedItem(1, "Wheat Seed", 3, Rarity.Bronze, 2);
             var plot = new Plot();
             mockField.Setup(f => f.GetPlot(0, 0)).Returns(plot);
@@ -41,7 +47,7 @@ namespace FarmSimSystems.Tests
         {
             var mockField = new Mock<IField>();
             var mockInventory = new Mock<IInventory>();
-            var playerActions = new PlayerActions(mockField.Object, mockInventory.Object);
+            var playerActions = new PlayerActions(mockField.Object, CreateDefaultPlayer(mockInventory.Object));
             var plot = new Plot();
             mockField.Setup(f => f.GetPlot(0, 0)).Returns(plot);
             
@@ -55,7 +61,7 @@ namespace FarmSimSystems.Tests
         {
             var mockField = new Mock<IField>();
             var mockInventory = new Mock<IInventory>();
-            var playerActions = new PlayerActions(mockField.Object, mockInventory.Object);
+            var playerActions = new PlayerActions(mockField.Object, CreateDefaultPlayer(mockInventory.Object));
             var harvestItem = new Item(1, "Wheat", 1, Rarity.Bronze, 10f);
             var crop = new Crop("Wheat", 2, harvestItem);
             var plot = new Plot();
