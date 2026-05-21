@@ -8,7 +8,7 @@ namespace FarmSimSystems.Tests
     {
         private Player CreateDefaultPlayer(IInventory inventory)
         {
-            return new Player("Freddie", 100, 100, inventory, 50, new Tool(1, "Hoe", 1, 2), new Position(0, 0), Direction.North);
+            return new Player("Freddie", 100, 100, inventory, 50, new Tool(1, "Hoe", 1, 2), new Position(1, 1), Direction.North);
         }
 
         [Fact]
@@ -18,9 +18,9 @@ namespace FarmSimSystems.Tests
             var mockInventory = new Mock<IInventory>();
             var playerActions = new PlayerActions(mockField.Object, CreateDefaultPlayer(mockInventory.Object));
             var plot = new Plot();
-            mockField.Setup(f => f.GetPlot(0, 0)).Returns(plot);
+            mockField.Setup(f => f.GetPlot(0, 1)).Returns(plot);
             
-            playerActions.Till(0, 0);
+            playerActions.Till();
             
             Assert.Equal(PlotState.Tilled, plot.currentState);
         }
@@ -49,9 +49,9 @@ namespace FarmSimSystems.Tests
             var mockInventory = new Mock<IInventory>();
             var playerActions = new PlayerActions(mockField.Object, CreateDefaultPlayer(mockInventory.Object));
             var plot = new Plot();
-            mockField.Setup(f => f.GetPlot(0, 0)).Returns(plot);
+            mockField.Setup(f => f.GetPlot(0, 1)).Returns(plot);
             
-            playerActions.Water(0, 0);
+            playerActions.Water();
             
             Assert.True(plot.isWatered);
         }

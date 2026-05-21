@@ -13,19 +13,32 @@ namespace FarmSimSystems
             this.player = player;
         }
 
-        public void Till(int row, int col)
+        public void Till()
         {
-            var plot = field.GetPlot(row, col);
+            if (!player.CanAct()) return;
 
-            if (plot.currentState == PlotState.Planted)
+            var affectedPlots = player.currentTool.GetAffectedPlots(player.playerPosition, player.facing);
+
+            int cost = player.currentTool.EnergyCostPerPlot * affectedPlots.Count;
+
+            if (player.Energy < cost) return;
+
+            foreach (var position in affectedPlots)
             {
-                if (plot.currentCrop.currentStage != CropStage.Seed)
+                var plot = field.GetPlot(position.Row, position.Col);
+
+                if (plot.currentState == PlotState.Planted)
                 {
-                    return;
+                    if (plot.currentCrop.currentStage != CropStage.Seed)
+                    {
+                        continue;
+                    }
                 }
+
+                plot.Till(player.inventory);
             }
 
-            plot.Till(player.inventory);
+            player.ConsumeEnergy(cost);
         }
 
         public void Plant(int row, int col, SeedItem seed)
@@ -42,16 +55,29 @@ namespace FarmSimSystems
             player.inventory.RemoveItem(seed);
         }
 
-        public void Water(int row, int col)
+        public void Water()
         {
-            var plot = field.GetPlot(row, col);
+            if (!player.CanAct()) return;
 
-            if (plot.isWatered)
+            var affectedPlots = player.currentTool.GetAffectedPlots(player.playerPosition, player.facing);
+
+            int cost = player.currentTool.EnergyCostPerPlot * affectedPlots.Count;
+
+            if (player.Energy < cost) return;
+
+            foreach (var position in affectedPlots)
             {
-                return;
+                var plot = field.GetPlot(position.Row, position.Col);
+
+                if (plot.isWatered)
+                {
+                    continue;
+                }
+
+                plot.Water();
             }
 
-            plot.Water();
+            player.ConsumeEnergy(cost);
         }
 
         public void Harvest(int row, int col)
